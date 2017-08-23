@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="VentaEditDlg" widgetVar="VentaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditVentaTitle}">
+            <h:form id="VentaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ventaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditVentaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{ventaController.selected.id}" title="#{bundle.EditVentaTitle_id}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditVentaLabel_codVenta}" for="codVenta" />
+                        <p:inputText id="codVenta" value="#{ventaController.selected.codVenta}" title="#{bundle.EditVentaTitle_codVenta}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_codVenta}"/>
+                        <p:outputLabel value="#{bundle.EditVentaLabel_docIdentidad}" for="docIdentidad" />
+                        <p:inputText id="docIdentidad" value="#{ventaController.selected.docIdentidad}" title="#{bundle.EditVentaTitle_docIdentidad}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_docIdentidad}"/>
+                        <p:outputLabel value="#{bundle.EditVentaLabel_fechaVenta}" for="fechaVenta" />
+                        <p:calendar id="fechaVenta" pattern="MM/dd/yyyy HH:mm:ss" value="#{ventaController.selected.fechaVenta}" title="#{bundle.EditVentaTitle_fechaVenta}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_fechaVenta}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditVentaLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{ventaController.selected.estado}" title="#{bundle.EditVentaTitle_estado}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_estado}"/>
+                        <p:outputLabel value="#{bundle.EditVentaLabel_totalPagar}" for="totalPagar" />
+                        <p:inputText id="totalPagar" value="#{ventaController.selected.totalPagar}" title="#{bundle.EditVentaTitle_totalPagar}" required="true" requiredMessage="#{bundle.EditVentaRequiredMessage_totalPagar}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ventaController.update}" value="#{bundle.Save}" update="display,:VentaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'VentaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="VentaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
